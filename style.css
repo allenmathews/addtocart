@@ -10,16 +10,12 @@ body {
     display: flex;
     flex-direction: column;
     max-width: 320px;
-    margin: 100px auto;
+    margin: 30px auto;
 }
 
 img {
-    height: 160px;
     width: 160px;
-    /* display: flex; */
-    /* align-items: center; */
-    margin-left: 70px;
-    margin-bottom: 20px;
+    margin: 0 auto;
 }
 
 input {
@@ -29,20 +25,18 @@ input {
     background-color: #DCE1EB;
     border: none;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 15px;
     font-family: 'Rubik', sans-serif;
-    font-size: large;
+    font-size: 20px;
+    margin: 10px 0;
 }
 
 button {
     color: #FDFDFD;
     background-color: #AC485A;
-    /* display: flex;
-    text-align: center;*/
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
-    margin-top: 10px;
     font-family: 'Rubik', sans-serif;
     font-size: large;
 }
