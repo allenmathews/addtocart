@@ -7,14 +7,18 @@ const appSetting = {
 
 const app = initializeApp(appSetting)
 const database = getDatabase(app)
-const shoppingListCart = ref(database, "shoppingList")
+const shoppingListInDB = ref(database, "shoppingList")
 
 
 const addButtonEl = document.getElementById("add-button")
 const inputFieldEl = document.getElementById("input-field")
+const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
     const dataval = inputFieldEl.value
+    inputFieldEl.value = "";
+    shoppingListEl.innerHTML += `<li>${dataval}</li>`
+
     console.log(`${dataval} has been added to the cart!`)
-    push(shoppingListCart, dataval)
+    push(shoppingListInDB, dataval)
 })
