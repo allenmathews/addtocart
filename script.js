@@ -16,9 +16,17 @@ const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
     const dataval = inputFieldEl.value
-    inputFieldEl.value = "";
-    shoppingListEl.innerHTML += `<li>${dataval}</li>`
 
+    clearInputFieldEl()
+    appendItemToShoppingListEl(dataval)
     console.log(`${dataval} has been added to the cart!`)
     push(shoppingListInDB, dataval)
 })
+
+function clearInputFieldEl() {
+    inputFieldEl.value = "";
+}
+
+function appendItemToShoppingListEl(itemValue) {
+    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
+}
