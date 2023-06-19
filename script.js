@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSetting = {
     databaseURL: "https://realtime-database-addtocart-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -22,6 +22,17 @@ addButtonEl.addEventListener("click", function() {
     console.log(`${dataval} has been added to the cart!`)
     push(shoppingListInDB, dataval)
 })
+
+onValue(shoppingListInDB, function(snapshot) {
+    let shoppingItem = Object.values(snapshot.val())
+    clearInputFieldEl()
+
+    for (let i = 0; i < shoppingItem.length; i++) {
+        let currentBook = shoppingItem[i]
+        appendItemToShoppingListEl(currentBook)
+    }
+})
+
 
 function clearInputFieldEl() {
     inputFieldEl.value = "";
