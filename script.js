@@ -15,24 +15,23 @@ const inputFieldEl = document.getElementById("input-field")
 const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
-    const dataval = inputFieldEl.value
-
+    const inputValue = inputFieldEl.value
+    push(shoppingListInDB, inputValue)
     clearInputFieldEl()
-    appendItemToShoppingListEl(dataval)
-    console.log(`${dataval} has been added to the cart!`)
-    push(shoppingListInDB, dataval)
 })
 
 onValue(shoppingListInDB, function(snapshot) {
-    let shoppingItem = Object.values(snapshot.val())
-    clearInputFieldEl()
-
-    for (let i = 0; i < shoppingItem.length; i++) {
-        let currentBook = shoppingItem[i]
-        appendItemToShoppingListEl(currentBook)
+    let itemsArray = Object.values(snapshot.val())
+    clearShoppingListEl()
+    for (let i = 0; i < itemsArray.length; i++) {
+        appendItemToShoppingListEl(itemsArray[i])
     }
 })
 
+function clearShoppingListEl() {
+    shoppingListEl.innerHTML = ""
+
+}
 
 function clearInputFieldEl() {
     inputFieldEl.value = "";
