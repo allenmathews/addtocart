@@ -5,36 +5,45 @@ const appSetting = {
     databaseURL: "https://realtime-database-addtocart-default-rtdb.asia-southeast1.firebasedatabase.app/"
 }
 
-const app = initializeApp(appSetting)
+const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "shoppingList")
 
-
-const addButtonEl = document.getElementById("add-button")
 const inputFieldEl = document.getElementById("input-field")
+const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", function() {
-    const inputValue = inputFieldEl.value
+    let inputValue = inputFieldEl.value
+
     push(shoppingListInDB, inputValue)
+
     clearInputFieldEl()
 })
 
 onValue(shoppingListInDB, function(snapshot) {
-    let itemsArray = Object.values(snapshot.val())
+    let itemsArray = Object.entries(snapshot.val())
+
     clearShoppingListEl()
+
     for (let i = 0; i < itemsArray.length; i++) {
-        appendItemToShoppingListEl(itemsArray[i])
+        let currentItem = itemsArray[i]
+            // Challenge: Make two let variables:
+            // currentItemID and currentItemValue and use currentItem to set both of
+            // them equal to the correct values.
+        let currentItemID = currentItem[0]
+        let currentItemValue = currentItem[1]
+
+        appendItemToShoppingListEl(currentItemValue)
     }
 })
 
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
-
 }
 
 function clearInputFieldEl() {
-    inputFieldEl.value = "";
+    inputFieldEl.value = ""
 }
 
 function appendItemToShoppingListEl(itemValue) {
